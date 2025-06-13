@@ -105,6 +105,6 @@ class UserController extends Controller
             return response()->json('User not found', 404);
         }
         $user->delete();
-        return response()->json($user, 204);
+        return response()->json(null, 204);
     }
 }
