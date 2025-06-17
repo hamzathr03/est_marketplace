@@ -33,7 +33,6 @@ class UserController extends Controller
                 'full_name' => 'string|required',
                 'email' => 'email|required',
                 'address' => 'string',
-                'phone_number' => 'integer',
                 'password'=> 'required|string|min:8'
             ]);
         } catch (ValidationException $e) {
@@ -45,7 +44,6 @@ class UserController extends Controller
                 'full_name' => $request->full_name,
                 'email' => $request->email,
                 'address' => $request->address,
-                'phone_number' => $request->phone_number,
                 'role' => $request->role,
                 'password' => $request->password,
             ]);
@@ -78,7 +76,6 @@ class UserController extends Controller
                 'full_name' => 'string',
                 'email' => 'email',
                 'address' => 'string',
-                'phone_number' => 'integer',
                 'password'=> 'required|string|min:8'
             ]);
         } catch (ValidationException $e) {
@@ -88,7 +85,6 @@ class UserController extends Controller
             'full_name',
             'email',
             'address',
-            'phone_number',
             'password',
         ]));
         $user->save();
