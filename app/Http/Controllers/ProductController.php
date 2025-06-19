@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class ProductController extends Controller
@@ -22,18 +23,30 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $user_id = Auth::id();
         try {
             $request->validate([
                 'name' => 'string',
                 'description' => 'string',
                 'price' => 'numeric',
                 'quantity' => 'numeric',
-                'image' => 'file',
+                'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
                 'review' => 'numeric',
+                'category_id' => 'required|numeric'
             ]);
         } catch (ValidationException $e) {
             return response()->json($e->errors(), 422);
         }
+        $path = $request->file('image')->store('images', 'public');
+        $product = Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+            'image_path' => $path,
+            'user_id' => $user_id,
+            'category_id' => $request->category_id
+        ]);
     }
 
     /**
