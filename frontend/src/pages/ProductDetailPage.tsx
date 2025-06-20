@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { 
-  ArrowLeft, 
-  Heart, 
-  ShoppingCart, 
-  Star, 
-  MapPin, 
-  Truck, 
+import {
+  ArrowLeft,
+  Heart,
+  ShoppingCart,
+  Star,
+  MapPin,
+  Truck,
   Leaf,
   Clock
 } from 'lucide-react';
@@ -21,11 +21,11 @@ const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { fetchProductById, isLoading } = useProductStore();
   const { addItem } = useCartStore();
-  
+
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedImage, setSelectedImage] = useState<string>('');
   const [quantity, setQuantity] = useState<number>(1);
-  
+
   useEffect(() => {
     const loadProduct = async () => {
       if (id) {
@@ -36,23 +36,23 @@ const ProductDetailPage: React.FC = () => {
         }
       }
     };
-    
+
     loadProduct();
   }, [fetchProductById, id]);
-  
+
   const handleAddToCart = () => {
     if (product) {
       addItem(product, quantity);
     }
   };
-  
+
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
     if (!isNaN(value) && value > 0 && product && value <= product.stock) {
       setQuantity(value);
     }
   };
-  
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 pt-24 pb-16">
@@ -84,7 +84,7 @@ const ProductDetailPage: React.FC = () => {
       </div>
     );
   }
-  
+
   if (!product) {
     return (
       <div className="min-h-screen bg-gray-50 pt-24 pb-16">
@@ -101,7 +101,7 @@ const ProductDetailPage: React.FC = () => {
       </div>
     );
   }
-  
+
   return (
     <div className="min-h-screen bg-gray-50 pt-24 pb-16">
       <div className="container mx-auto px-4">
@@ -113,7 +113,7 @@ const ProductDetailPage: React.FC = () => {
           <span className="mx-2 text-gray-400">/</span>
           <span className="text-gray-700">{product.name}</span>
         </nav>
-        
+
         <div className="bg-white p-6 md:p-8 rounded-lg shadow-sm">
           <div className="flex flex-col md:flex-row gap-8">
             {/* Product Images */}
@@ -125,7 +125,7 @@ const ProductDetailPage: React.FC = () => {
                   className="w-full h-full object-contain"
                 />
               </div>
-              
+
               {/* Thumbnail Images */}
               <div className="flex space-x-2">
                 {product.images.map((image, index) => (
@@ -145,7 +145,7 @@ const ProductDetailPage: React.FC = () => {
                 ))}
               </div>
             </div>
-            
+
             {/* Product Info */}
             <div className="md:w-1/2">
               <div className="flex flex-col h-full">
@@ -158,9 +158,9 @@ const ProductDetailPage: React.FC = () => {
                       <Badge variant="primary" size="sm">Local</Badge>
                     )}
                   </div>
-                  
+
                   <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">{product.name}</h1>
-                  
+
                   <div className="flex items-center mb-4">
                     <div className="flex items-center text-amber-400">
                       <Star className="h-5 w-5 fill-current" />
@@ -173,22 +173,22 @@ const ProductDetailPage: React.FC = () => {
                       {product.reviews.length} reviews
                     </span>
                     <span className="mx-2 text-gray-300">|</span>
-                    <Link 
-                      to={`/sellers/${product.seller.id}`} 
+                    <Link
+                      to={`/sellers/${product.seller.id}`}
                       className="text-sm text-primary-600 hover:text-primary-700"
                     >
                       {product.seller.name}
                     </Link>
                   </div>
-                  
+
                   <div className="text-2xl font-bold text-gray-900 mb-4">
                     ${product.price.toFixed(2)}
                   </div>
-                  
+
                   <div className="text-gray-700 mb-6">
                     <p>{product.description}</p>
                   </div>
-                  
+
                   {/* Product Meta */}
                   <div className="space-y-3 mb-6">
                     <div className="flex items-center text-sm">
@@ -197,21 +197,21 @@ const ProductDetailPage: React.FC = () => {
                         {product.location} ({product.distance} km away)
                       </span>
                     </div>
-                    
+
                     <div className="flex items-center text-sm">
                       <Leaf className="h-5 w-5 text-gray-400 mr-2" />
                       <span>
                         {product.isOrganic ? 'Organically grown' : 'Conventionally grown'}
                       </span>
                     </div>
-                    
+
                     <div className="flex items-center text-sm">
                       <Truck className="h-5 w-5 text-gray-400 mr-2" />
                       <span>
                         Free delivery on orders over $35
                       </span>
                     </div>
-                    
+
                     <div className="flex items-center text-sm">
                       <Clock className="h-5 w-5 text-gray-400 mr-2" />
                       <span>
@@ -220,7 +220,7 @@ const ProductDetailPage: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="mt-auto">
                   {/* Quantity Selector */}
                   <div className="mb-6">
@@ -248,7 +248,7 @@ const ProductDetailPage: React.FC = () => {
                       </span>
                     </div>
                   </div>
-                  
+
                   {/* Action Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Button
@@ -272,57 +272,11 @@ const ProductDetailPage: React.FC = () => {
               </div>
             </div>
           </div>
-          
-          {/* Reviews Section */}
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <h2 className="text-xl font-bold text-gray-900 mb-6">Customer Reviews</h2>
-            
-            {product.reviews.length === 0 ? (
-              <div className="text-center py-8">
-                <p className="text-gray-500">No reviews yet. Be the first to review this product.</p>
-              </div>
-            ) : (
-              <div className="space-y-6">
-                {product.reviews.map((review) => (
-                  <div key={review.id} className="border-b border-gray-100 pb-6 last:border-0">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center">
-                        <div className="h-10 w-10 rounded-full overflow-hidden mr-3">
-                          <img
-                            src={review.user.avatar || 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg'}
-                            alt={review.user.name}
-                            className="h-full w-full object-cover"
-                          />
-                        </div>
-                        <div>
-                          <h4 className="font-medium text-gray-900">{review.user.name}</h4>
-                          <p className="text-xs text-gray-500">
-                            {new Date(review.createdAt).toLocaleDateString()}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-center text-amber-400">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`h-4 w-4 ${i < review.rating ? 'fill-current' : 'text-gray-300'}`}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                    <p className="text-gray-700">{review.comment}</p>
-                  </div>
-                ))}
-              </div>
-            )}
-            
-            <div className="mt-8">
-              <Button>Write a Review</Button>
-            </div>
+
           </div>
         </div>
       </div>
-    </div>
+
   );
 };
 

@@ -13,22 +13,22 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addItem } = useCartStore();
   const { toggleFavorite } = useProductStore();
-  
+
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     addItem(product, 1);
   };
-  
+
   const handleToggleFavorite = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     toggleFavorite(product.id);
   };
-  
+
   return (
     <div className="group animate-fade-in">
-      <Link 
+      <Link
         to={`/products/${product.id}`}
         className="block h-full"
       >
@@ -40,24 +40,24 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               alt={product.name}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
-            
+
             {/* Organic Badge */}
             {product.isOrganic && (
               <div className="absolute top-2 left-2">
-                <Badge variant="success\" size="sm">Organic</Badge>
+                <Badge variant="success" size="sm">Organic</Badge>
               </div>
             )}
-            
+
             {/* Action Buttons */}
             <div className="absolute top-2 right-2 flex flex-col space-y-2">
-              <button 
+              <button
                 className="bg-white p-2 rounded-full shadow-sm hover:bg-gray-100 transition-colors"
                 onClick={handleToggleFavorite}
               >
                 <Heart className="h-4 w-4 text-gray-600" />
               </button>
-              
-              <button 
+
+              <button
                 className="bg-white p-2 rounded-full shadow-sm hover:bg-gray-100 transition-colors"
                 onClick={handleAddToCart}
               >
@@ -65,17 +65,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               </button>
             </div>
           </div>
-          
+
           {/* Product Info */}
           <div className="p-4">
-            <div className="flex items-center text-sm text-gray-500 mb-1">
-              <span>{product.seller.name}</span>
-              <span className="mx-2">•</span>
-              <span>{product.distance}km away</span>
-            </div>
-            
+            {/* Removed seller info and distance */}
+
             <h3 className="font-medium text-gray-900 mb-1">{product.name}</h3>
-            
+
             {/* Rating */}
             <div className="flex items-center mb-2">
               <div className="flex items-center text-amber-400">
@@ -89,11 +85,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 {product.reviews.length} reviews
               </span>
             </div>
-            
+
             {/* Price */}
             <div className="flex items-center justify-between">
               <span className="text-lg font-semibold">${product.price.toFixed(2)}</span>
-              
+
               <div className="text-sm text-gray-500">
                 {product.stock > 10 ? (
                   <span className="text-green-600">In Stock</span>
