@@ -24,12 +24,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ type }) => {
 
     try {
       const endpoint =
-        type === 'login' ? 'http://localhost:8000/api/login' : 'http://localhost:8000/api/register';
+        type === 'login' ? 'http://localhost:8000/api/login' : 'http://localhost:8000/api/signup';
 
       const body =
         type === 'login'
           ? { email, password }
-          : { email, password, role: isSeller ? 'seller' : 'user' };
+          : { email, password, name, role: isSeller ? 'seller' : 'user' };
 
       const response = await fetch(endpoint, {
         method: 'POST',
