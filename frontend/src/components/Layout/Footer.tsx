@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Facebook, 
-  Instagram, 
-  Twitter, 
-  Mail, 
-  Phone, 
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Mail,
+  Phone,
   MapPin,
   Leaf
 } from 'lucide-react';
@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
               </a>
             </div>
           </div>
-          
+
           {/* Quick Links */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
@@ -70,7 +70,7 @@ const Footer: React.FC = () => {
               </li>
             </ul>
           </div>
-          
+
           {/* Customer Service */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
@@ -104,7 +104,7 @@ const Footer: React.FC = () => {
               </li>
             </ul>
           </div>
-          
+
           {/* Contact Info */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
@@ -126,16 +126,16 @@ const Footer: React.FC = () => {
               <li className="flex">
                 <Mail className="h-5 w-5 text-primary-600 mr-2 flex-shrink-0" />
                 <span className="text-gray-600">
-                  contact@localmarket.fr
+                  contact@Estmarket.fr
                 </span>
               </li>
             </ul>
           </div>
         </div>
-        
+
         <div className="border-t border-gray-200 mt-8 pt-8 text-center">
           <p className="text-gray-500 text-sm">
-            &copy; {new Date().getFullYear()} LocalMarket. All rights reserved.
+            &copy; {new Date().getFullYear()} Estmarket. All rights reserved.
           </p>
         </div>
       </div>

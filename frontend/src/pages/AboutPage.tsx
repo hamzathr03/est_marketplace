@@ -13,7 +13,7 @@ const AboutPage: React.FC = () => {
             <Leaf className="h-16 w-16 text-primary-600" />
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            About LocalMarket
+            About Estmarket
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Connecting local producers with conscious consumers. We're building a sustainable
@@ -26,7 +26,7 @@ const AboutPage: React.FC = () => {
           <div className="max-w-3xl mx-auto">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h2>
             <p className="text-gray-600 mb-6">
-              LocalMarket was founded with a simple yet powerful mission: to make local,
+              Estmarket was founded with a simple yet powerful mission: to make local,
               quality products accessible to everyone while supporting small producers and
               artisans. We believe in creating a marketplace that values transparency,
               sustainability, and community.
