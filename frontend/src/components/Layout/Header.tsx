@@ -1,13 +1,13 @@
-﻿import React, { useState, useEffect } from 'react';
+﻿﻿import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { 
-  Search, 
-  ShoppingCart, 
-  Heart, 
-  User, 
-  Menu, 
-  X, 
-  LogOut, 
+import {
+  Search,
+  ShoppingCart,
+  Heart,
+  User,
+  Menu,
+  X,
+  LogOut,
   LogIn,
   Store,
   Leaf
@@ -21,30 +21,30 @@ const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  
+
   const location = useLocation();
-  
+
   const { user, isAuthenticated, logout } = useAuthStore();
   const { getItemsCount, toggleCart } = useCartStore();
-  
+
   const cartItemsCount = getItemsCount();
-  
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
+
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location]);
-  
+
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen);
-  
+
   const headerClasses = `fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white shadow-md border-b border-gray-100 ${
     isScrolled ? 'py-2' : 'py-4'
   }`;
@@ -76,7 +76,7 @@ const Header: React.FC = () => {
             <Link to="/favorites" className="text-gray-700 hover:text-primary-600 transition-colors">
               <Heart className="h-5 w-5" />
             </Link>
-            <button 
+            <button
               className="relative text-gray-700 hover:text-primary-600 transition-colors"
               onClick={toggleCart}
             >
@@ -126,7 +126,7 @@ const Header: React.FC = () => {
                       </div>
                     </Link>
                   )}
-                  <button 
+                  <button
                     onClick={logout}
                     className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
                   >

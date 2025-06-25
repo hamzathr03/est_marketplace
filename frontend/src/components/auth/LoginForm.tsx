@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, Lock, User } from 'lucide-react';
 import Button from '../ui/Button';
 import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../../store/useAuthStore';
 
 interface LoginFormProps {
   type: 'login' | 'signup';
@@ -9,7 +10,8 @@ interface LoginFormProps {
 
 const LoginForm: React.FC<LoginFormProps> = ({ type }) => {
   const navigate = useNavigate();
-  
+  const { login, signup } = useAuthStore(); // 👈 نستعمل login/signup من Zustand
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,21 +25,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ type }) => {
     setIsLoading(true);
 
     try {
-      const endpoint =
-        type === 'login' ? 'http://localhost:8000/api/login' : 'http://localhost:8000/api/signup';
-
-      const body =
-        type === 'login'
-          ? { email, password }
-          : { email, password, name, role: isSeller ? 'seller' : 'user' };
-
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
-
-      if (!response.ok) throw new Error();
+      // 👇 نعيط مباشرة على Zustand login/signup
+      if (type === 'login') {
+        await login(email, password);
+      } else {
+        await signup(name, email, password, isSeller);
+      }
 
       navigate('/');
     } catch (err) {
@@ -121,7 +114,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ type }) => {
             placeholder="••••••••"
             minLength={6}
           />
-        </div>
+</div>
       </div>
 
       {type === 'signup' && (
