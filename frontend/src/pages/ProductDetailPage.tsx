@@ -152,7 +152,7 @@ const ProductDetailPage: React.FC = () => {
                 <div>
                   <div className="flex flex-wrap items-center gap-2 mb-2">
                     {product.isOrganic && (
-                      <Badge variant="success\" size="sm">Organic</Badge>
+                      <Badge variant="success" size="sm">Organic</Badge>
                     )}
                     {product.isLocal && (
                       <Badge variant="primary" size="sm">Local</Badge>
